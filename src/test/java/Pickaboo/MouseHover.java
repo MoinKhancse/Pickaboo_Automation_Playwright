@@ -1,5 +1,7 @@
 package Pickaboo;
 
+import java.util.List;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -22,9 +24,9 @@ public class MouseHover {
 	public void start() {
 		playwright = Playwright.create();
 		browserType = playwright.chromium();
-		browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
-		browserContext = browser.newContext(new Browser.NewContextOptions());
-		page = browser.newPage();	
+		browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false).setArgs(List.of("--start-maximized")));
+		browserContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(null));
+		page = browserContext.newPage();	
 	}
 	
 	@Test(priority = 0)
@@ -69,12 +71,15 @@ public class MouseHover {
 		ElementHandle close = page.querySelector("//div[@class='close-btn']//img");
 		close.click();
 		Thread.sleep(2000);
+		
 		ElementHandle Login = page.querySelector("//span[normalize-space()='Login']");
 		Login.click();
 		Thread.sleep(2000);
+		
 		ElementHandle Number = page.querySelector("//input[@placeholder='Mobile Number/Email']");
 		Number.fill("01920436373");
 		Thread.sleep(2000);
+		
 		ElementHandle pass = page.querySelector("//input[@placeholder='Password']");
 		pass.fill("01717511288mk");
 		Thread.sleep(2000);
@@ -152,6 +157,16 @@ public class MouseHover {
 		Remove.click();
 		Thread.sleep(5000);
 		
+	}
+	@Test(priority=5)
+	public void search() throws InterruptedException {
+		ElementHandle serc = page.querySelector("//div[@class='menu-search col']//input[@placeholder='Search for products, brands and more']");
+		serc.fill("vivo");
+		Thread.sleep(3000);
+		
+		ElementHandle search_img = page.querySelector("//img[@alt='search img']");
+		search_img.click();
+		Thread.sleep(5000);
 	}
 	
 	@AfterSuite

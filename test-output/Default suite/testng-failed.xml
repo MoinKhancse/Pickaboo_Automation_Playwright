@@ -5,9 +5,11 @@
     <classes>
       <class name="Pickaboo.MouseHover">
         <methods>
+          <include name="removeCart"/>
           <include name="start"/>
           <include name="mouseHover"/>
           <include name="close"/>
+          <include name="chackOut"/>
         </methods>
       </class> <!-- Pickaboo.MouseHover -->
     </classes>
